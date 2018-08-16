@@ -8,6 +8,23 @@ Assign staff to customers sequentually and equally.  Keywords: sas sql join merg
 
     https://tinyurl.com/y9jh8g24
     https://communities.sas.com/t5/Base-SAS-Programming/Equally-distribute-records-to-a-list/m-p/487306
+    
+     Recent simplification by mark
+     Mark Keintz
+     mkeintz@wharton.upenn.edu
+
+     I suggest dropping the "if _n_=0 ..." line, and attach the
+     "nobs=obs" parameter to the other set statement.
+     A good pedagogical example of compile time
+     vs execution time SET parameters.
+
+
+     data want;
+       /* if _n_=0 then set staff nobs=obs;*/
+       set customer;
+         pnt=mod(_n_-1,obs) +1;
+         set staff point=pnt nobs=obs;
+     run;quit;
 
     INPUT
     =====
